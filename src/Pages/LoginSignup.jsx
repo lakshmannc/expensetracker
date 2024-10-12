@@ -1,21 +1,22 @@
 import React from 'react';
-import './Loginsignup.css';
+import '../Pages/CSS/LoginSignup.css';
+
 const LoginSignup = () => {
     return (
         <div className='loginsignup'>
             <div className="loginsignup-container">
                 <h1>Sign up</h1>
-                <div className="loginfield">
-                    <input type = "text" placeholder='your Name'/>
+                <div className="loginsignup-fields">
+                    <input type = "text" placeholder='Your Name'/>
                     <input type = "email" placeholder=' Email'/>
                     <input type = "password" placeholder='Password'/>
 
                 </div>
                 <button>Continue</button>
-                <p className="login-login">Already have an account?<span>Login Here</span></p>
-            <div className="login-agree">
+                <p className="loginsignup-login">Already have an account?<span>Login Here</span></p>
+            <div className="loginsignup-agree">
                 <input type="checkbox" name ='' id = '' />
-                <p>By continuing, I agree to terms and conditions that apply.</p>
+                <p>By Continuing ,I agree to terms and conditions.</p>
             </div>
             </div>
 
