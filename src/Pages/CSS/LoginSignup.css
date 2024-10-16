@@ -1,143 +1,121 @@
-.container{
+.container {
+    width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    margin: auto;
-    margin-top: 200px;
-    width: 600px;
-    background: gray;
-    padding-bottom: 30px;
-   }
-   .header{
-       display: flex;
-       flex-direction: column;
-       align-items: center;
-       gap: 9px;
-       width: 100%;
-       margin-top: 30px;
-   }
-   .text{
-       color: yellowgreen;
-       font-size: 48px;
-       font-weight: 700;
-   
-   }
-
-   .underline{
-      width: 61px;
-      height: 6px;
-      background: #3c009d;
-      border-radius: 9px;
-   }
-   .inputs{
-       margin-top: 55px;
-       display: flex;
-       flex-direction: column;
-       gap: 25px;
-   }
-
-   .input{
-       display: flex;
-       align-items: center;
-       margin: auto;
-       width: 480px;
-       height: 80px;
-       background: #eaeaea;
-       border-radius:6px;
-   }
-   .input img{
-       margin: 0px 30px;
-   }
-
-   .input input{
-       height: 50px;
-       width: 400px;
-       background: transparent;
-       border: none;
-       outline: none;
-       color: #676767;
-       font-size: 19px;
-   }
-
-   .forget-password{
-       padding-left: 62px;
-       margin-top: 27px;
-       color: black;
-       font-size: 18px;
-   }
-   .forget-password span{
-    color: #4c00b4;
-    cursor: pointer;
-   }
-
-   .submit-container{
-    display: flex;
-    gap: 30px;
-    margin: 60px auto;
-   }
-   .submit{
-    display: flex;
-    justify-content: center;
     align-items: center;
-    width: 220px;
-    height: 59px;
-    color: #fff;
-    background: #4c00b4;
-    border-radius: 50px;
-    font-size: 19px;
-    font-weight: 700;
-    cursor: pointer;
-   }
-   .gray{
-    background: #eaeaea;
-    color: #676767;
-   }
+}
 
-   @media(max-width:1280px){
-       .loginsignup{
-           padding-top: 50px;
-       }
-       .loginsignup-container{
-           width: auto;
-           max-width: 500px;
-           max-height: 500px;
-       }
-       .loginsignup-container h1{
-           margin: 10px 0px;
-       }
-       .loginsignup-fields{
-           gap: 20px;
-           margin-top: 20px;
-       }
-       .loginsignup-fields input{
-           height: 65px;
-           width: 93%;
-       }
-       .loginsignup-container button{
-           width: 100%;
-       }
-       .loginsignup-login{
-           font-size: 16px;
-       }
-       .loginsignup-agree{
-           font-size: 14px;
-           gap: 10px;
-       }
-   }
-   @media(max-width:800px){
-       .loginsignup-container{
-           padding: 20px 30px;
-       }
-       .loginsignup-container h1{
-           font-size: 24px;
-       }
-       .loginsignup-fields{
-           margin-top: 20px;
-       }
-       .loginsignup-fields input{
-           height: 50px;
-       }
-       .loginsignup-container button{
-           height: 50px;
-           font-size: 16px;
-       }
-   }
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.toggle-button {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.toggle-button-login,
+.toggle-button-signup {
+    width: 45%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+.toggle-button-login:hover,
+.toggle-button-signup:hover {
+    background-color: #3e8e41;
+}
+
+.toggle-button-login.active,
+.toggle-button-signup.active {
+    background-color: #3e8e41;
+}
+
+.inputs {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.input img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.input input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.forget-password {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.forget-password span {
+    color: #4CAF50;
+    cursor: pointer;
+}
+
+.submit-container {
+    text-align: center;
+    width: 100%;
+}
+
+.submit {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: #fff;
+    cursor: pointer;
+}
+
+.submit:hover {
+    background-color: #3e8e41;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        width: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 250px;
+    }
+    .toggle-button-login,
+    .toggle-button-signup {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
