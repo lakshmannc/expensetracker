@@ -44,6 +44,6 @@
     background: white;
     cursor: pointer;
     }
-.nav-login button: active{
+.nav-login button :active {
     background-color: #f3f3f3;
 }   

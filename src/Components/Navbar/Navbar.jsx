@@ -83,8 +83,8 @@ const Navbar = () => {
       </div>
 
       <div className="name">
-          <p>Budget Assistance</p>
-        </div> 
+          <h4>BUDGET ASSISTANCE</h4>
+      </div> 
          
     <div className='nav-login'>
         <NotificationsIcon/>
