@@ -1,7 +1,7 @@
 .navbar{
     display: flex;
     justify-content: space-around;
-    padding: 16px;
+    padding: 10px;
     box-shadow: 0 1px 3px -2px black;
 }
 .logo{
@@ -9,7 +9,7 @@
     align-items: center;
     max-width: 150px;
 }
-.nav-menu{
+.name{
     display: flex;
     align-items: center;
     list-style: none;
@@ -19,7 +19,7 @@
     font-weight: 500;
 }
 
-.nav-menu li{
+.name li{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -44,6 +44,6 @@
     background: white;
     cursor: pointer;
     }
-.nav-login button: active{
+.nav-login button :active {
     background-color: #f3f3f3;
 }   
