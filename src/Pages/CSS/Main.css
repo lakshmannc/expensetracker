@@ -1,0 +1,12 @@
+.main-pod{
+    display: block;
+    align-items: center;
+    background: white; 
+    margin : 250px;
+}
+.main-pod h2{
+    font-size: 50px;
+}
+.main-pod p{
+    font-size: 25px;
+}

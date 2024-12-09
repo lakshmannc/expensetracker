@@ -72,6 +72,7 @@ const Navbar = () => {
        <ListIcon 
         onClick={toggleDrawer("left",true)
         }
+        style = {{fontSize :'50px'}}
         />
         <Drawer
             anchor={"left"}
