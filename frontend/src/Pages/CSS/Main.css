@@ -1,12 +1,23 @@
-.main-pod{
-    display: block;
-    align-items: center;
-    background: white; 
-    margin : 250px;
+.main{
+    background-image: url('../../Components/assests/wallet.jpg');
+    background-size: cover; /* Makes the image cover the entire element */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    display: block; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Set height to full viewport height */
+    color: white; /* Change text color for better visibility */
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
 }
-.main-pod h2{
+.main h2{
     font-size: 50px;
+    margin: 25vh;
+    color: grey;
 }
-.main-pod p{
+.main p{
     font-size: 25px;
+    color: grey;    
 }
