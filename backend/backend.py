@@ -9,7 +9,7 @@ import pytesseract
 
 # 1. Simple Expense Tracker
 class ExpenseTracker:
-    def _init_(self):
+    def __init__(self):
         self.expenses = []
 
     def add_expense(self, description, amount):
@@ -39,8 +39,8 @@ class ExpenseTracker:
 
 # 2. Categorized Expense Tracker
 class CategorizedExpenseTracker(ExpenseTracker):
-    def _init_(self):
-        super()._init_()
+    def __init__(self):
+        super().__init__()
         self.categories = {}
 
     def add_expense(self, description, amount, category):
@@ -57,8 +57,8 @@ class CategorizedExpenseTracker(ExpenseTracker):
 
 # 3. Recurring Expense Tracker
 class RecurringExpenseTracker(ExpenseTracker):
-    def _init_(self):
-        super()._init_()
+    def __init__(self):
+        super().__init__()
         self.recurring_expenses = {}
 
     def add_recurring_expense(self, description, amount, frequency):
@@ -72,8 +72,8 @@ class RecurringExpenseTracker(ExpenseTracker):
 
 # 4. Voice-Activated Expense Tracker
 class VoiceExpenseTracker(ExpenseTracker):
-    def _init_(self):
-        super()._init_()
+    def __init__(self):
+        super().__init__()
 
     def add_expense_by_voice(self):
         recognizer = sr.Recognizer()
@@ -85,24 +85,31 @@ class VoiceExpenseTracker(ExpenseTracker):
                 description, amount = text.split(' for ')
                 amount = float(amount.strip('$'))
                 self.add_expense(description, amount)
-            except Exception as e:
+            except sr.UnknownValueError:
                 print("Sorry, could not understand the speech. Try again.")
+            except ValueError:
+                print("Please ensure you say the amount in the correct format (e.g., '20 dollars for lunch').")
+            except Exception as e:
+                print(f"An error occurred: {e}")
 
 # 5. Receipt Scanner (OCR)
 class ReceiptScanner:
-    def _init_(self):
+    def __init__(self):
         pass
 
     def extract_text_from_image(self, image_path):
-        image = Image.open(image_path)
-        text = pytesseract.image_to_string(image)
-        print(f"Extracted Text: {text}")
-        return text
+        if os.path.exists(image_path):
+            image = Image.open(image_path)
+            text = pytesseract.image_to_string(image)
+            print(f"Extracted Text: {text}")
+            return text
+        else:
+            print(f"Error: {image_path} not found.")
 
 # 6. Multi-Currency Expense Tracker
 class MultiCurrencyExpenseTracker(ExpenseTracker):
-    def _init_(self):
-        super()._init_()
+    def __init__(self):
+        super().__init__()
         self.c = CurrencyRates()
 
     def add_expense_in_currency(self, description, amount, currency, base_currency="USD"):
@@ -112,8 +119,8 @@ class MultiCurrencyExpenseTracker(ExpenseTracker):
 
 # 7. Child-Friendly Expense Tracker (with Points)
 class ChildFriendlyExpenseTracker(ExpenseTracker):
-    def _init_(self):
-        super()._init_()
+    def __init__(self):
+        super().__init__()
         self.points = 0
 
     def add_expense_with_points(self, description, amount):
@@ -132,7 +139,7 @@ class ChildFriendlyExpenseTracker(ExpenseTracker):
 
 # 9. Group Expense Tracker (Splitting among multiple people)
 class GroupExpenseTracker:
-    def _init_(self):
+    def __init__(self):
         self.group_expenses = {}
 
     def add_group_expense(self, description, amount, members):
