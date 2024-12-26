@@ -6,6 +6,11 @@ from forex_python.converter import CurrencyRates
 import speech_recognition as sr
 from PIL import Image
 import pytesseract
+import requests
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
 
 # 1. Simple Expense Tracker
 class ExpenseTracker:
@@ -77,20 +82,30 @@ class VoiceExpenseTracker(ExpenseTracker):
 
     def add_expense_by_voice(self):
         recognizer = sr.Recognizer()
-        with sr.Microphone() as source:
-            print("Please say the expense description and amount...")
-            audio = recognizer.listen(source)
-            try:
-                text = recognizer.recognize_google(audio)
-                description, amount = text.split(' for ')
-                amount = float(amount.strip('$'))
-                self.add_expense(description, amount)
-            except sr.UnknownValueError:
-                print("Sorry, could not understand the speech. Try again.")
-            except ValueError:
-                print("Please ensure you say the amount in the correct format (e.g., '20 dollars for lunch').")
-            except Exception as e:
-                print(f"An error occurred: {e}")
+        try:
+            with sr.Microphone() as source:
+                print("Please say the expense description and amount...")
+                audio = recognizer.listen(source)
+        except sr.RequestError as e:
+            print(f"Request error: {e}")
+            return
+        except sr.UnknownValueError as e:
+            print(f"Unknown value error: {e}")
+            return
+        except Exception as e:
+            print(f"Microphone error: {e}")
+            return
+        try:
+            text = recognizer.recognize_google(audio)
+            description, amount = text.split(' for ')
+            amount = float(amount.strip('$'))
+            self.add_expense(description, amount)
+        except sr.UnknownValueError:
+            print("Sorry, could not understand the speech. Try again.")
+        except ValueError:
+            print("Please ensure you say the amount in the correct format (e.g., '20 dollars for lunch').")
+        except Exception as e:
+            print(f"An error occurred: {e}")
 
 # 5. Receipt Scanner (OCR)
 class ReceiptScanner:
@@ -113,9 +128,18 @@ class MultiCurrencyExpenseTracker(ExpenseTracker):
         self.c = CurrencyRates()
 
     def add_expense_in_currency(self, description, amount, currency, base_currency="USD"):
-        converted_amount = self.c.convert(currency, base_currency, amount)
+        try:
+            converted_amount = self.c.convert(currency, base_currency, amount)
+            logging.info(f"Converted {amount} {currency} to {converted_amount:.2f} {base_currency}")
+            print(f"Converted {amount} {currency} to {converted_amount:.2f} {base_currency}")
+        except requests.exceptions.RequestException as e:
+            print(f"Error connecting to Forex API: {e}")
+            return
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            return
         super().add_expense(description, converted_amount)
-        print(f"Converted {amount} {currency} to {converted_amount:.2f} {base_currency}")
+        print(f"Added expense: {description} - ${converted_amount:.2f}")
 
 # 7. Child-Friendly Expense Tracker (with Points)
 class ChildFriendlyExpenseTracker(ExpenseTracker):
@@ -173,12 +197,15 @@ def main():
 
     voice_tracker = VoiceExpenseTracker()
     voice_tracker.add_expense_by_voice()
-
+    
     scanner = ReceiptScanner()
     scanner.extract_text_from_image("receipt_sample.png")
 
     multi_currency_tracker = MultiCurrencyExpenseTracker()
-    multi_currency_tracker.add_expense_in_currency("Dinner", 50, "EUR")
+    try:
+        multi_currency_tracker.add_expense_in_currency("Dinner", 50, "EUR")
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
     child_friendly_tracker = ChildFriendlyExpenseTracker()
     child_friendly_tracker.add_expense_with_points("Toy", 20)
