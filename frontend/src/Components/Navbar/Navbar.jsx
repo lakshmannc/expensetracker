@@ -13,10 +13,10 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import ListIcon from '@mui/icons-material/List';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-   
+  const navigate = useNavigate();
     const [state, setState] = React.useState({
         top: false,
         left: false,
@@ -24,8 +24,14 @@ const Navbar = () => {
         right: false,
       });
 
+      const handleLinkClick = (path) => {
+        
+        navigate(path); 
+        toggleDrawer("left", false)(); 
+        };
+
       const toggleDrawer = (anchor, open) => (event) => {
-        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+        if (event && event.type && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
           return;
         }
     
@@ -41,7 +47,7 @@ const Navbar = () => {
           <List>
             {['Home'].map((text, index) => (
               <ListItem key={text} disablePadding>
-                <ListItemButton>
+                <ListItemButton onClick={() => handleLinkClick('/')}>
                   <ListItemIcon>
                     {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                   </ListItemIcon>
@@ -52,9 +58,9 @@ const Navbar = () => {
           </List>
           <Divider />
           <List>
-            {['Dashboard'].map((text, index) => (
+            {['Expenses'].map((text, index) => (
               <ListItem key={text} disablePadding>
-                <ListItemButton>
+                <ListItemButton onClick={() => handleLinkClick('/expense')}>
                   <ListItemIcon>
                     {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                   </ListItemIcon>
