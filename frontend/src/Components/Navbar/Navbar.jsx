@@ -1,4 +1,6 @@
 import * as React from 'react';
+import './Navbar.css';
+import{ Link } from 'react-router-dom'
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -11,11 +13,10 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import ListIcon from '@mui/icons-material/List';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import './Navbar.css'
-import{ Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-   
+  const navigate = useNavigate();
     const [state, setState] = React.useState({
         top: false,
         left: false,
@@ -23,8 +24,14 @@ const Navbar = () => {
         right: false,
       });
 
+      const handleLinkClick = (path) => {
+        
+        navigate(path); 
+        toggleDrawer("left", false)(); 
+        };
+
       const toggleDrawer = (anchor, open) => (event) => {
-        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+        if (event && event.type && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
           return;
         }
     
@@ -38,7 +45,33 @@ const Navbar = () => {
           onKeyDown={toggleDrawer(anchor, false)}
         >
           <List>
-            {['Home', 'Dashboard', 'Tracking','Income'].map((text, index) => (
+            {['Home'].map((text, index) => (
+              <ListItem key={text} disablePadding>
+                <ListItemButton onClick={() => handleLinkClick('/')}>
+                  <ListItemIcon>
+                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  </ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+          <Divider />
+          <List>
+            {['Expenses'].map((text, index) => (
+              <ListItem key={text} disablePadding>
+                <ListItemButton onClick={() => handleLinkClick('/expense')}>
+                  <ListItemIcon>
+                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  </ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+          <Divider />
+          <List>
+            {['Profile'].map((text, index) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
@@ -51,7 +84,7 @@ const Navbar = () => {
           </List>
           <Divider />
           <List>
-            {['Settings', 'User'].map((text, index) => (
+            {['Settings'].map((text, index) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
@@ -62,6 +95,8 @@ const Navbar = () => {
               </ListItem>
             ))}
           </List>
+          <Divider />
+         
         </Box>
       );
 
@@ -89,7 +124,9 @@ const Navbar = () => {
          
     <div className='nav-login'>
         <NotificationsIcon/>
-    <Link to = '/login'> <button>Login</button></Link>
+        <ul>
+        <li><Link to="/login"><button className="login-button">Login</button></Link></li>
+        </ul>
                 
         </div>
         </div>

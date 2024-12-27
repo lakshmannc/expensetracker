@@ -3,6 +3,7 @@ import csv
 import json
 import datetime
 from forex_python.converter import CurrencyRates
+from flask import Flask, jsonify, request
 import speech_recognition as sr
 from PIL import Image
 import pytesseract
@@ -11,6 +12,19 @@ import logging
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
+
+app = Flask(__name__)
+expenses = []
+
+@app.route('/api/expenses', methods=['GET'])
+def get_expenses():
+    return jsonify(expenses)
+
+@app.route('/api/expenses', methods=['POST'])
+def add_expense():
+    data = request.json
+    expenses.append(data)
+    return jsonify(data), 201
 
 # 1. Simple Expense Tracker
 class ExpenseTracker:
@@ -216,4 +230,4 @@ def main():
     group_tracker.view_group_expenses()
 
 if __name__ == "__main__":
-    main()
+   app.run(debug=True)
