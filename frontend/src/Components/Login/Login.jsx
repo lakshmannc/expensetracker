@@ -1,12 +1,27 @@
 import React, { useState } from 'react';
-import '../Pages/CSS/LoginSignup.css';
-import user_icon from "../Components/assests/profile.png"
-import email_icon from "../Components/assests/gmail.png"
-import password_icon from "../Components/assests/locked-computer.png"
-import phone_icon from "../Components/assests/phone.png"
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import './LoginSignup.css';
+import user_icon from "../assests/profile.png";
+import email_icon from "../assests/gmail.png";
+import password_icon from "../assests/locked-computer.png";
+import phone_icon from "../assests/phone.png";
 
-const LoginSignup = () => {
+const Login = () => {
     const [action, setAction] = useState("Sign Up");
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const navigate = useNavigate(); // Initialize navigate
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('Email:', email);
+        console.log('Password:', password);
+        
+        // Here you can add your authentication logic
+
+        // Redirect to the main page after successful login
+        navigate('/'); // Redirect to the main page
+    };
 
     return (
         <div className='container'>
@@ -31,7 +46,7 @@ const LoginSignup = () => {
                 )}
                 <div className="input">
                     <img src={email_icon} alt='' />
-                    <input type="email" placeholder='Email' />
+                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Email' />
                 </div>
                 {action === "Sign Up" && (
                     <div className="input">
@@ -41,7 +56,7 @@ const LoginSignup = () => {
                 )}
                 <div className="input">
                     <img src={password_icon} alt='' />
-                    <input type="password" placeholder='Password' />
+                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Password' />
                 </div>
                 {action === "Sign Up" && (
                     <div className="input">
@@ -54,9 +69,10 @@ const LoginSignup = () => {
                 )}
             </div>
             <div className="submit-container">
-                <button className="submit">Submit</button>
+                <button className="submit" onClick={handleSubmit}>Submit</button>
             </div>
         </div>
-    )
+    );
 }
-export default LoginSignup
+
+export default Login;

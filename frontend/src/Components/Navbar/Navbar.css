@@ -33,7 +33,20 @@
     gap: 45px;
 
 } 
-.nav-login button{
+.nav-login ul {
+    display: flex;
+    align-items: center;
+    gap: 45px;
+    list-style: none; /* Remove default list styling */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
+
+.nav-login ul li {
+    display: inline; /* Make list items inline */
+}
+
+.nav-login ul .login-button {
     width: 157px;
     height: 58px;
     outline: none; 
@@ -44,7 +57,9 @@
     font-weight: 500;
     background: white;
     cursor: pointer;
-    }
-.nav-login button :active {
-    background-color: #f3f3f3;
-}   
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.nav-login ul .login-button:hover {
+    background-color: #f3f3f3; /* Darker shade on hover */
+}
