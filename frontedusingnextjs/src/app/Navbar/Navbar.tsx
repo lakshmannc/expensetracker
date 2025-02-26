@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 export default function Navbar() {
+
   return (
     <nav className="bg-gray-800 p-4">
       <div className="container mx-auto flex justify-between items-center">
@@ -17,11 +18,10 @@ export default function Navbar() {
           <Link href="/income" className="text-white hover:text-blue-300">
             Income
           </Link>
-          <Link href="/login" className="text-white hover:text-blue-300">
-            Login
-          </Link>
+        
         </div>
       </div>
     </nav>
   );
 }
+
